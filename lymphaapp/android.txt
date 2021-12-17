@@ -1,0 +1,3 @@
+title=LYMPHA App
+author=Rickard Verner Hultgren
+orientation=portrait
