@@ -13,11 +13,16 @@ from kivy.app import App
 from kivy.uix.button import Button
 
 
+#with open("pneumonia.lympha") as f:
+#    contents = f.read()
+#    main_label.text = contents # main_label is an instance of kivy's Label class.
+
 class TestApp(App):
 
     def build(self):
         # return a Button() as a root widget
         return Button(text='hello world')
+
 
 
 if __name__ == '__main__':
