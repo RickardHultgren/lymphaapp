@@ -1,29 +1,61 @@
-'''
-Application example using build() + return
-==========================================
+#import kivy
 
-An application can be built if you return a widget on build(), or if you set
-self.root.
-'''
+#from kivy.app import App
+#from kivy.uix.button import Button
+#from kivy.uix.widget import Widget
+#x = 1
+#class Example(App):
 
-import kivy
-kivy.require('1.0.7')
+#    def build(self):
+#      buttons = list()
+#      for y in range(0,x):
+#           button = Button(text="Button")
+#           buttons.append(button)
+#      return buttons
 
+#Example().run()
+
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 from kivy.app import App
+from kivy.uix.screenmanager import Screen
 from kivy.uix.button import Button
+from kivy.clock import mainthread
+from kivy.uix.screenmanager import ScreenManager, Screen
+from kivy.lang import Builder
+
+Builder.load_string('''
+<MapScreen>:
+ name: 'map'
+
+ GridLayout:
+  id: grid
+  cols: 1
 
 
-#with open("pneumonia.lympha") as f:
-#    contents = f.read()
-#    main_label.text = contents # main_label is an instance of kivy's Label class.
 
-class TestApp(App):
+''')
+
+
+NUMBER_OF_BUTTONS = 5
+
+
+class MapScreen(Screen):
+
+    @mainthread
+    def on_enter(self):
+        for i in range(0,NUMBER_OF_BUTTONS):
+            button = Button(text="B_" + str(i))
+            self.ids.grid.add_widget(button)
+
+
+class Test(App):
 
     def build(self):
-        # return a Button() as a root widget
-        return Button(text='hello world')
+        # Create the screen manager
+        sm = ScreenManager()
+        sm.add_widget(MapScreen(name='main'))
+        return sm
 
 
-
-if __name__ == '__main__':
-    TestApp().run()
+Test().run()
