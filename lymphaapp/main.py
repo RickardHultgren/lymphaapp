@@ -19,9 +19,6 @@ class ScreenOne(Screen):
         global sc1
         global steps
         global turn
-        if steps > 1 :
-          steps += 1
-        turn += 1
         print("hello")
         my_box= BoxLayout()
         #my_show_list = ["My Way", "Wine Drinker", "Boots"]
@@ -41,9 +38,7 @@ class ScreenOne(Screen):
         global sc1
         global steps
         global turn
-        if turn == 2 :
-          steps += 1
-        turn += 1
+        steps += 1
         print(steps)
         Clock.unschedule(self.__init__())
         #self.manager.current = 'screen1'        
