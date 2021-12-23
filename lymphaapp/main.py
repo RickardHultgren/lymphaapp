@@ -10,7 +10,7 @@ from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.clock import Clock
 
-steps= 3
+nodes= 3
 sm = ScreenManager()
 
 class ScreenOne(Screen):
@@ -18,7 +18,7 @@ class ScreenOne(Screen):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         global sc1
-        global steps
+        global nodes
         global turn
         h_box = BoxLayout(orientation='horizontal')
         v_box = BoxLayout(orientation='vertical')
@@ -26,7 +26,7 @@ class ScreenOne(Screen):
         h_box.my_buttons = [] # if you want to keep an "easy" reference to your buttons to do something with them later
                                #kivy doesnt crashes because it creates the property automatically
         #for message in my_show_list:
-        for step in range(0,steps):
+        for step in range(0,nodes):
             switch_box = BoxLayout(orientation='vertical')
             label = Label(text='text')
             switch = Switch()
@@ -47,10 +47,13 @@ class ScreenOne(Screen):
 
     def changer(self,*args):
         global sc1
-        global steps
+        global nodes
         global turn
-        steps += 1
-        print(steps)
+
+        if self.switch(active = False):
+
+        nodes += 1
+        print(nodes)
         Clock.unschedule(self.__init__())
         #self.manager.current = 'screen1'        
         
