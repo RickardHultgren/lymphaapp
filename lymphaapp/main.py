@@ -10,16 +10,16 @@ from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.clock import Clock
 
-
+switch = Switch()
 sm = ScreenManager()
 
 class ScreenOne(Screen):
-    global x
+    global switch
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         global sc1
 
-        global turn
+        global switch
         h_box = BoxLayout(orientation='horizontal')
         v_box = BoxLayout(orientation='vertical')
         #my_show_list = ["My Way", "Wine Drinker", "Boots"]
@@ -28,7 +28,7 @@ class ScreenOne(Screen):
         #for message in my_show_list:
         switch_box = BoxLayout(orientation='vertical')
         label = Label(text='text')
-        switch = Switch()
+        #switch = Switch()
         #switch.bind(active=callback)
         switch_box.add_widget(label)
         switch_box.add_widget(switch)
@@ -43,13 +43,11 @@ class ScreenOne(Screen):
 
     def oking(self,*args):
         global sc1
+        global switch
 
-
-        if self.h_box.switch_box.switch(active = False):
+        if switch.active :
             print("hello")
-        nodes += 1
-        print(nodes)
-        Clock.unschedule(self.__init__())
+        #Clock.unschedule(self.__init__())
         #self.manager.current = 'screen1'        
         
 sc1 = ScreenOne(name='screen1')
