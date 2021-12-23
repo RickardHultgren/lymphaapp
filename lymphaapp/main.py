@@ -10,7 +10,7 @@ from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.clock import Clock
 
-nodes= 3
+
 sm = ScreenManager()
 
 class ScreenOne(Screen):
@@ -18,7 +18,7 @@ class ScreenOne(Screen):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         global sc1
-        global nodes
+
         global turn
         h_box = BoxLayout(orientation='horizontal')
         v_box = BoxLayout(orientation='vertical')
@@ -26,15 +26,14 @@ class ScreenOne(Screen):
         h_box.my_buttons = [] # if you want to keep an "easy" reference to your buttons to do something with them later
                                #kivy doesnt crashes because it creates the property automatically
         #for message in my_show_list:
-        for step in range(0,nodes):
-            switch_box = BoxLayout(orientation='vertical')
-            label = Label(text='text')
-            switch = Switch()
-            #switch.bind(active=callback)
-            switch_box.add_widget(label)
-            switch_box.add_widget(switch)
-            h_box.my_buttons.append(switch_box)
-            h_box.add_widget(switch_box)
+        switch_box = BoxLayout(orientation='vertical')
+        label = Label(text='text')
+        switch = Switch()
+        #switch.bind(active=callback)
+        switch_box.add_widget(label)
+        switch_box.add_widget(switch)
+        #h_box.my_buttons.append(switch_box)
+        h_box.add_widget(switch_box)
         v_box.add_widget(h_box)            
         #self.add_widget(h_box)            
         okbtn = Button(text="OK")
@@ -43,15 +42,11 @@ class ScreenOne(Screen):
         self.add_widget(v_box)
 
     def oking(self,*args):
-        pass
-
-    def changer(self,*args):
         global sc1
-        global nodes
-        global turn
 
-        if self.switch(active = False):
 
+        if self.h_box.switch_box.switch(active = False):
+            print("hello")
         nodes += 1
         print(nodes)
         Clock.unschedule(self.__init__())
