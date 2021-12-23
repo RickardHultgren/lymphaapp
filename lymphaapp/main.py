@@ -4,12 +4,13 @@ from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.button import Button
 from kivy.uix.widget import Widget
 from kivy.uix.button import Button
+from kivy.uix.switch import Switch
+from kivy.uix.label import Label
 from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.clock import Clock
 
-steps= 1
-turn = 0
+steps= 3
 sm = ScreenManager()
 
 class ScreenOne(Screen):
@@ -19,20 +20,30 @@ class ScreenOne(Screen):
         global sc1
         global steps
         global turn
-        print("hello")
-        my_box= BoxLayout()
+        h_box = BoxLayout(orientation='horizontal')
+        v_box = BoxLayout(orientation='vertical')
         #my_show_list = ["My Way", "Wine Drinker", "Boots"]
-        my_box.my_buttons = [] # if you want to keep an "easy" reference to your buttons to do something with them later
+        h_box.my_buttons = [] # if you want to keep an "easy" reference to your buttons to do something with them later
                                #kivy doesnt crashes because it creates the property automatically
         #for message in my_show_list:
         for step in range(0,steps):
-            button = Button(text="press")
-            button.bind(on_press=self.changer)
-            my_box.my_buttons.append(button)
-            my_box.add_widget(button)
-            print(step)
-        self.add_widget(my_box)            
-        #return my_box
+            switch_box = BoxLayout(orientation='vertical')
+            label = Label(text='text')
+            switch = Switch()
+            #switch.bind(active=callback)
+            switch_box.add_widget(label)
+            switch_box.add_widget(switch)
+            h_box.my_buttons.append(switch_box)
+            h_box.add_widget(switch_box)
+        v_box.add_widget(h_box)            
+        #self.add_widget(h_box)            
+        okbtn = Button(text="OK")
+        okbtn.bind(on_press=self.oking)
+        v_box.add_widget(okbtn)            
+        self.add_widget(v_box)
+
+    def oking(self,*args):
+        pass
 
     def changer(self,*args):
         global sc1
@@ -43,8 +54,6 @@ class ScreenOne(Screen):
         Clock.unschedule(self.__init__())
         #self.manager.current = 'screen1'        
         
-
-
 sc1 = ScreenOne(name='screen1')
 
 class TestClass(App):
