@@ -160,7 +160,7 @@ object_list = Statement(object_list)
 
 #Function for running the linked list.
 def mapfunc():
-	global d3
+	#global d3
 	#global UI
 	#global CLI_filename 
 	global argv_len 
@@ -194,6 +194,7 @@ def mapfunc():
 	#if mode_graph == True:
 	graphstr = 'digraph lympha {\nnode [shape=record];'
 	#ADDED INT IN INT(STEPS)
+	print("mapfunvc")
 	for step in range(0, int(steps)):
 		#nextstates = list()
 		checked = 0 
@@ -203,8 +204,8 @@ def mapfunc():
 				endstring = str()
 				strr=str("%s" % object_list[key].name)
 				strr = re.sub("\s+", "", strr.strip())
-	
 				if str(start) == strr :
+
 					if object_list[key].flow == 0 or object_list[key].statement_flow == 0:
 						pre_statement_flow = 0
 					else:
@@ -217,7 +218,7 @@ def mapfunc():
 								object_list[key].statement_flow = 1
 							if mode_exe == True :	
 								main.ScreenOne.procedure(object_list[key].name)
-
+								print("mapfunvc")
 						else:
 							if object_list[key].flow == 1 or object_list[key].statement_flow == 1:
 								pre_statement_flow = 1
@@ -517,66 +518,66 @@ def mapfunc():
 								else:
 										pre_statement_flow = 0
 
-		object_list[key].statement_flow = int(pre_statement_flow)
+		#object_list[key].statement_flow = int(pre_statement_flow)
 
 		#alert("begin E1")
 		#if object_list[key].statement_flow == 0 or object_list[key].flow == 0 :    
-		if object_list[key].flow != 1 :    
+				if object_list[key].flow != 1 :    
 			#alert("A8 IF 0 name:%s  ; datatype:%s  ; flow:%s  ; #statement_flow:%s" % (object_list[key].name, object_list[key].datatype, object_list[key].flow, object_list[key].statement_flow ))									
 
 			#object_list[key].flow = 0 
 			#object_list[key].statement_flow = 0 
 			#pre_statement_flow = 0
 
-			object_list[key].statement_flow = int(pre_statement_flow)        
-			object_list[key].flow = int(pre_statement_flow)        
+					object_list[key].statement_flow = int(pre_statement_flow)        
+					object_list[key].flow = int(pre_statement_flow)        
 		#if object_list[key].flow == 0 :
 		#	object_list[key].statement_flow = 0 
 
-		if step == 0 :
-			object_list[key].flow = 1
-			object_list[key].statement_flow = 1
+				if step == 0 :
+					object_list[key].flow = 1
+					object_list[key].statement_flow = 1
 
 
 			#DELTETED GRAPHMODE-IF
-		if object_list[key].statement_flow == 0:
+				if object_list[key].statement_flow == 0:
 
-				graph_string=""
-				if object_list[key].datatype == "bina" :
-					graph_string="0B"
-				if object_list[key].datatype == "bineval" :
-					graph_string=object_list[key].statement_value
-				if object_list[key].datatype == "nonbineval" :
-					graph_string=("score: %s" % (object_list[key].statement_value))
-				if object_list[key].datatype == "valu" :                                
-					graph_string=object_list[key].statement_value
-				graphstr += ('"%s" [label="step %s: %s\\n%s", fillcolor=white, style=filled] ; \n' % (start,step+1,start,str(graph_string)))
+						graph_string=""
+						if object_list[key].datatype == "bina" :
+							graph_string="0B"
+						if object_list[key].datatype == "bineval" :
+							graph_string=object_list[key].statement_value
+						if object_list[key].datatype == "nonbineval" :
+							graph_string=("score: %s" % (object_list[key].statement_value))
+						if object_list[key].datatype == "valu" :                                
+							graph_string=object_list[key].statement_value
+						graphstr += ('"%s" [label="step %s: %s\\n%s", fillcolor=white, style=filled] ; \n' % (start,step+1,start,str(graph_string)))
 	
 				#graphstr += ('"%s" [label="step %s: %s\\n%s"] \n' % (start,step+1,start,graph_string)) 
 		#alert("before draw")
-		if object_list[key].statement_flow == 1:
+				if object_list[key].statement_flow == 1:
 
-			graph_string=""
-			if object_list[key].datatype == "bina" :
-				graph_string="1B"
-			if object_list[key].datatype == "bineval" :
-				graph_string=object_list[key].statement_value
-			if object_list[key].datatype == "nonbineval" :
-				graph_string=("score: %s" % (object_list[key].statement_value))
-			if object_list[key].datatype == "valu" :                                
-				graph_string=object_list[key].statement_value
+					graph_string=""
+					if object_list[key].datatype == "bina" :
+						graph_string="1B"
+					if object_list[key].datatype == "bineval" :
+						graph_string=object_list[key].statement_value
+					if object_list[key].datatype == "nonbineval" :
+						graph_string=("score: %s" % (object_list[key].statement_value))
+					if object_list[key].datatype == "valu" :                                
+						graph_string=object_list[key].statement_value
 
-			graphstr += ('"%s" [label="step %s: %s\\n%s", fillcolor=yellow, style=filled] ; \n' % (start,step+1,start,str(graph_string)))
+					graphstr += ('"%s" [label="step %s: %s\\n%s", fillcolor=yellow, style=filled] ; \n' % (start,step+1,start,str(graph_string)))
 
-		#alert("before draw2")									
-		try:	
-			for next_object in object_list[key].next_list :
+				#alert("before draw2")									
+				try:	
+					for next_object in object_list[key].next_list :
 
-				if object_list[key].name != next_object :
-					graphstr += ('"%s" -> "%s" ; \n' % (start,next_object))
-					nextstates.append(next_object)
-		except:
-			pass
+						if object_list[key].name != next_object :
+							graphstr += ('"%s" -> "%s" ; \n' % (start,next_object))
+							nextstates.append(next_object)
+				except:
+					pass
 
 
 		for start in starts :
@@ -842,15 +843,24 @@ def lexer():
 		count += 1          
 
 def mainfunc():
-
-	argv = '-f "CRB65.lympha" -steps 5 -exe -start "meeting."'
-	if __name__=='__main__':
-		for x in range(0, argv_len):
+	global filecheck
+	global mode_exe  
+	global starts
+	global steps
+	print("1")
+	sys.argv = list()
+	sys.argv = ["-f", "CRB65.lympha","-steps", "5", "-exe", "-start", "meeting."]
+	argv_len=len(sys.argv)
+	#if __name__=='__main__':
+	#	print("1.1")
+	for x in range(0, argv_len):
+			print("1.1.1")
 			if sys.argv[x] == "-f":
 				CLI_filename = sys.argv[x+1]
 				filename = CLI_filename
 				filenames.append(filename)
 				filecheck = True
+				print("1.1.1.1")
 			if sys.argv[x] == "-h":
 				print ('-h for help\n-f file\n-graph\n-start "start node"\n-steps amount of steps')
 			if sys.argv[x] == "-exe":
@@ -864,25 +874,29 @@ def mainfunc():
 			if sys.argv[x] == "-start":
 				starts.append(sys.argv[x+1])
 		# Execute functions that are connected to the arguments:
-		if filecheck == True:
-			lexer()
-		else:
-			print("Please add file names.")
+	#if filecheck == True:
+	#		lexer()
+	#else:
+	#		print("Please add file names.")
 
-
-
-		temporary_starts = list()
-		lexer()
-		nextstates = list()
-		theturn = 1
-		#Finding objects in 
-		factorform = document['factorlist']
-		for start in temporary_starts :
-			for k in range(0,len(object_list)):
+	print("2")
+	#temporary_starts = list()
+	#for start in temporary_starts :
+	#	starts.append(start)
+	lexer()
+	nextstates = list()
+	theturn = 1
+	mapfunc()
+	print("end")
+	#Finding objects in 
+	#factorform = document['factorlist']
+''''
+	for start in temporary_starts :
+		for k in range(0,len(object_list)):
 				if object_list[k].name == start :
 					object_list[k].flow = 1
 					object_list[k].statement_flow = 1
-
+		print("3")
 		for ztep in range(0, int(steps)) :
 			#alert("aaa0")
 			if theturn < 3:
@@ -918,7 +932,8 @@ def mainfunc():
   	       	#After each set of start loops a validation of theturn should be done.
 			if theturn == 2:
 				theturn = 3
-
+'''
+	#print("end")
 
 
 def turn2func(ev) :
@@ -950,7 +965,6 @@ def turn2func(ev) :
 			temporary_starts.append(start_item.value)
 	except:
 		pass
-         
 	mapfunc()
 
 
