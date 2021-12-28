@@ -1,4 +1,5 @@
-from browser import document, bind, html, alert, window
+import main
+#pfrom browser import document, bind, html, alert, window
 #from javascript import this
 
 #???			
@@ -56,7 +57,7 @@ mode_show = False
 mode_map = False
 
 #Graphviz
-d3 = window.d3
+#d3 = window.d3
 
 # Check if all script files are loaded:
 filecheck = False
@@ -90,23 +91,23 @@ class Statement(dict):
 
 	def __init__(self, value=None):
 		if value is None:
-pass
+			pass
 		elif isinstance(value, dict):
-for key in value:
-	self.__setitem__(key, value[key])
+			for key in value:
+				self.__setitem__(key, value[key])
 		else:
-raise TypeError('expected dict')
+			raise TypeError('expected dict')
 
 	def __setitem__(self, key, value):
 		if isinstance(value, dict) and not isinstance(value, Statement):
-value = Statement(value)
+			value = Statement(value)
 		super(Statement, self).__setitem__(key, value)
 
 	def __getitem__(self, key):
 		found = self.get(key, Statement.MARKER)
 		if found is Statement.MARKER:
-found = Statement()
-super(Statement, self).__setitem__(key, found)
+			found = Statement()
+		super(Statement, self).__setitem__(key, found)
 		return found
 
 	__setattr__, __getattr__ = __setitem__, __getitem__
@@ -214,6 +215,8 @@ def mapfunc():
 							if step == 0 :
 								object_list[key].flow = 1
 								object_list[key].statement_flow = 1
+							if mode_exe == True :	
+								main.ScreenOne.procedure(object_list[key].name)
 
 						else:
 							if object_list[key].flow == 1 or object_list[key].statement_flow == 1:
@@ -310,15 +313,15 @@ def mapfunc():
 										object_list[key].statement_value = ("score: %s\nthreshold: %s" % (sum1, object_list[key].global_relative_variable1))
 									elif object_list[key].operator1 == "no" and int(object_list[key].global_relative_variable1) != int(sum1):
 										pre_statement_flow = 1
-							object_list[key].statement_value = ("score: %s\nthreshold: %s" % (sum1, object_list[key].global_relative_variable1))
-						elif object_list[key].operator1 == "g" and int(object_list[key].global_relative_variable1) > int(sum1):
-							pre_statement_flow = 1
-							object_list[key].statement_value = ("score: %s\nthreshold: %s" % (sum1, object_list[key].global_relative_variable1))
-						elif object_list[key].operator1 == "l" and int(object_list[key].global_relative_variable1) < int(sum1):
-							pre_statement_flow = 1
-							object_list[key].statement_value = ("score: %s\nthreshold: %s" % (sum1, object_list[key].global_relative_variable1))
-						else:
-							pre_statement_flow = 0
+									object_list[key].statement_value = ("score: %s\nthreshold: %s" % (sum1, object_list[key].global_relative_variable1))
+								elif object_list[key].operator1 == "g" and int(object_list[key].global_relative_variable1) > int(sum1):
+									pre_statement_flow = 1
+									object_list[key].statement_value = ("score: %s\nthreshold: %s" % (sum1, object_list[key].global_relative_variable1))
+								elif object_list[key].operator1 == "l" and int(object_list[key].global_relative_variable1) < int(sum1):
+									pre_statement_flow = 1
+									object_list[key].statement_value = ("score: %s\nthreshold: %s" % (sum1, object_list[key].global_relative_variable1))
+								else:
+									pre_statement_flow = 0
 					#alert("begin B4")
 					object_list[key].statement_flow = int(pre_statement_flow)   
 					object_list[key].flow = int(pre_statement_flow)        
@@ -584,23 +587,23 @@ def mapfunc():
 							if object_list[l].name == nexting :          
 								nextstates.append(nexting)									
 			if checked == 0:
-			for k in range(0,len(object_list)):
-				if object_list[k].name==start:
-					for nexting in object_list[k].next_list :
-						for l in range(0,len(object_list)):  
-							if object_list[l].name == nexting :          
-								if object_list[k].flow  == 0 or object_list[k].statement_flow == 0 :
-									object_list[l].flow = 0
-									object_list[l].statement_flow = 0
-			for k in range(0,len(object_list)):
-				if object_list[k].name==start:
-					for nexting in object_list[k].next_list :
-						for l in range(0,len(object_list)):  
-							if object_list[l].name == nexting :         
+				for k in range(0,len(object_list)):
+					if object_list[k].name==start:
+						for nexting in object_list[k].next_list :
+							for l in range(0,len(object_list)):  
+								if object_list[l].name == nexting :          
+									if object_list[k].flow  == 0 or object_list[k].statement_flow == 0 :
+										object_list[l].flow = 0
+										object_list[l].statement_flow = 0
+				for k in range(0,len(object_list)):
+					if object_list[k].name==start:
+						for nexting in object_list[k].next_list :
+							for l in range(0,len(object_list)):  
+								if object_list[l].name == nexting :         
 					
-								if object_list[k].flow  == 1 or object_list[k].statement_flow == 1 and object_list[l].flow != 0:
-									object_list[l].flow = 1
-									object_list[l].statement_flow = 1
+									if object_list[k].flow  == 1 or object_list[k].statement_flow == 1 and object_list[l].flow != 0:
+										object_list[l].flow = 1
+										object_list[l].statement_flow = 1
 				checked = 0
 				del starts[:]
 				#starts = list()                           
@@ -742,19 +745,19 @@ def lexer():
 
 		for i in range(0,len(arrowobj)):
 
-for key in range(0,len(object_list)):
+			for key in range(0,len(object_list)):
 
-	thename = str(object_list[key].name)
-	thename = re.sub("\s*", "", thename) 
-	if i != 0 :
-		if thename == arrowobj[(0)].replace(" ",""):
+				thename = str(object_list[key].name)
+				thename = re.sub("\s*", "", thename) 
+				if i != 0 :
+					if thename == arrowobj[(0)].replace(" ",""):
 
-			nexting = ""
-			nexting = arrowobj[i].replace(" ","")
-			if not nexting == "" :
-				object_list[key].next_list.append(nexting)
-			print(object_list[key].next_list)
-			print(object_list[key].name)
+						nexting = ""
+						nexting = arrowobj[i].replace(" ","")
+						if not nexting == "" :
+							object_list[key].next_list.append(nexting)
+						print(object_list[key].next_list)
+						print(object_list[key].name)
 	#Connect to depending objects:
 	#Types of continuations of the side2 string:
 	# 1. Operator + Sum of binaries
@@ -826,95 +829,95 @@ for key in range(0,len(object_list)):
 									object_list[key].datatype = "nonbineval"
 	
 						#For non-binary values and equations
-						elif sides[0] != ""  and sides[1] != "" :
-							print("YYY %s" % object_list[key].name)
-						#if 0 == len(operator_chop) :
-							object_list[key].statement_value = sides[1] 
-							object_list[key].datatype = "valu"                               
-					except:
-						pass								
+							elif sides[0] != ""  and sides[1] != "" :
+								print("YYY %s" % object_list[key].name)
+								#if 0 == len(operator_chop) :
+								object_list[key].statement_value = sides[1] 
+								object_list[key].datatype = "valu"                               
+						except:
+							pass								
 	
-			except:
-				pass
+				except:
+					pass
 		count += 1          
 
 def mainfunc():
 
-argv = '-f "CRB65.lympha" -steps 5 -exe -start "meeting."'
-if __name__=='__main__':
-	for x in range(0, argv_len):
-		if sys.argv[x] == "-f":
-			CLI_filename = sys.argv[x+1]
-			filename = CLI_filename
-			filenames.append(filename)
-			filecheck = True
-		if sys.argv[x] == "-h":
-			print ('-h for help\n-f file\n-graph\n-start "start node"\n-steps amount of steps')
-		if sys.argv[x] == "-exe":
-			mode_exe = True
-		if sys.argv[x] == "-graph":
-			mode_graph = True                    
-		if sys.argv[x] == "-statements":
-			mode_state = True    
-		if sys.argv[x] == "-steps":
-			steps = int(sys.argv[x+1])
-		if sys.argv[x] == "-start":
-			starts.append(sys.argv[x+1])
-	# Execute functions that are connected to the arguments:
-	if filecheck == True:
+	argv = '-f "CRB65.lympha" -steps 5 -exe -start "meeting."'
+	if __name__=='__main__':
+		for x in range(0, argv_len):
+			if sys.argv[x] == "-f":
+				CLI_filename = sys.argv[x+1]
+				filename = CLI_filename
+				filenames.append(filename)
+				filecheck = True
+			if sys.argv[x] == "-h":
+				print ('-h for help\n-f file\n-graph\n-start "start node"\n-steps amount of steps')
+			if sys.argv[x] == "-exe":
+				mode_exe = True
+			if sys.argv[x] == "-graph":
+				mode_graph = True                    
+			if sys.argv[x] == "-statements":
+				mode_state = True    
+			if sys.argv[x] == "-steps":
+				steps = int(sys.argv[x+1])
+			if sys.argv[x] == "-start":
+				starts.append(sys.argv[x+1])
+		# Execute functions that are connected to the arguments:
+		if filecheck == True:
+			lexer()
+		else:
+			print("Please add file names.")
+
+
+
+		temporary_starts = list()
 		lexer()
-	else:
-		print("Please add file names.")
+		nextstates = list()
+		theturn = 1
+		#Finding objects in 
+		factorform = document['factorlist']
+		for start in temporary_starts :
+			for k in range(0,len(object_list)):
+				if object_list[k].name == start :
+					object_list[k].flow = 1
+					object_list[k].statement_flow = 1
 
-
-
-	temporary_starts = list()
-	lexer()
-	nextstates = list()
-	theturn = 1
-	#Finding objects in 
-	factorform = document['factorlist']
-	for start in temporary_starts :
-		for k in range(0,len(object_list)):
-			if object_list[k].name == start :
-				object_list[k].flow = 1
-				object_list[k].statement_flow = 1
-
-	for ztep in range(0, int(steps)) :
-		#alert("aaa0")
-		if theturn < 3:
-			for start in temporary_starts :
+		for ztep in range(0, int(steps)) :
+			#alert("aaa0")
+			if theturn < 3:
+				for start in temporary_starts :
 	
-				for k in range(0,len(object_list)):
-				#alert("aa4 [%s]" % object_list[k].name)
-					if object_list[k].name==start and (object_list[k].name[-1] == "?") :
-						object_list[k].flow = 0 
-						object_list[k].statement_flow = 0 
-						object_list[k].statement_flow = 0
-						object_list[k].flow = 0
-						factorform <= str("%s = "% object_list[k].name)
-						factorform <= html.INPUT(Type="text", Id=(object_list[k].name),Class="factorItems")
-						factorform <= html.BR()
-						theturn = 2
+					for k in range(0,len(object_list)):
+					#alert("aa4 [%s]" % object_list[k].name)
+						if object_list[k].name==start and (object_list[k].name[-1] == "?") :
+							object_list[k].flow = 0 
+							object_list[k].statement_flow = 0 
+							object_list[k].statement_flow = 0
+							object_list[k].flow = 0
+							factorform <= str("%s = "% object_list[k].name)
+							factorform <= html.INPUT(Type="text", Id=(object_list[k].name),Class="factorItems")
+							factorform <= html.BR()
+							theturn = 2
 
 
-					#Loading the next starts from the current starts.
-					if object_list[k].name==start :
-						for nexting in object_list[k].next_list :
-							for l in range(0,len(object_list)):  
-								if object_list[l].name == nexting :          
-									nextstates.append(nexting)
+						#Loading the next starts from the current starts.
+						if object_list[k].name==start :
+							for nexting in object_list[k].next_list :
+								for l in range(0,len(object_list)):  
+									if object_list[l].name == nexting :          
+										nextstates.append(nexting)
 
 
-		#Make new starts. Should be done after each starts-loop
-		del temporary_starts[:]
-		for nexting in nextstates: 
-			if nexting not in temporary_starts: 
-				temporary_starts.append(nexting) 
-		del nextstates[:]
-         	#After each set of start loops a validation of theturn should be done.
-		if theturn == 2:
-			theturn = 3
+			#Make new starts. Should be done after each starts-loop
+			del temporary_starts[:]
+			for nexting in nextstates: 
+				if nexting not in temporary_starts: 
+					temporary_starts.append(nexting) 
+			del nextstates[:]
+  	       	#After each set of start loops a validation of theturn should be done.
+			if theturn == 2:
+				theturn = 3
 
 
 
@@ -951,13 +954,13 @@ def turn2func(ev) :
 	mapfunc()
 
 
-document["turn2"].bind("click", turn2func)
-document["addbttn"].bind("click", add_input)
-document["addstart"].bind("click", add_start)
-document["zcriptbttn"].bind("click", zcripts)
-document["menubttn"].bind("click", changeMenu)
+#document["turn2"].bind("click", turn2func)
+#document["addbttn"].bind("click", add_input)
+#document["addstart"].bind("click", add_start)
+#document["zcriptbttn"].bind("click", zcripts)
+#document["menubttn"].bind("click", changeMenu)
 
-document.getElementById( "index").style.backgroundColor='#EFAB00'
-document.getElementById( "indexsmall").style.backgroundColor='#EFAB00'
-document.getElementById( "index").style.color='#ffffff'
+#document.getElementById( "index").style.backgroundColor='#EFAB00'
+#document.getElementById( "indexsmall").style.backgroundColor='#EFAB00'
+#document.getElementById( "index").style.color='#ffffff'
 #document.getElementById( "index").className="index2active"

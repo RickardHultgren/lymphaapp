@@ -48,8 +48,34 @@ class ScreenOne(Screen):
 
         if self.switch.active :
             print("hello")
-        #Clock.unschedule(self.__init__())
-        #self.manager.current = 'screen1'        
+        Clock.unschedule(self.__init__())
+        #self.manager.current = 'screen1'
+
+    def procedure(self,*args,title):
+        super().__procedure__(**kwargs)
+        global sc1
+
+        self.switch = Switch()
+        h_box = BoxLayout(orientation='horizontal')
+        v_box = BoxLayout(orientation='vertical')
+        #my_show_list = ["My Way", "Wine Drinker", "Boots"]
+        h_box.my_buttons = [] # if you want to keep an "easy" reference to your buttons to do something with them later
+                               #kivy doesnt crashes because it creates the property automatically
+        #for message in my_show_list:
+        switch_box = BoxLayout(orientation='vertical')
+        label = Label(text=title)
+        #switch = Switch()
+        #switch.bind(active=callback)
+        switch_box.add_widget(label)
+        switch_box.add_widget(self.switch)
+        #h_box.my_buttons.append(switch_box)
+        h_box.add_widget(switch_box)
+        v_box.add_widget(h_box)            
+        #self.add_widget(h_box)            
+        okbtn = Button(text="OK")
+        okbtn.bind(on_press=self.oking)
+        v_box.add_widget(okbtn)            
+        self.add_widget(v_box)               
         
 sc1 = ScreenOne(name='screen1')
 
@@ -65,7 +91,8 @@ class TestClass(App):
  
         
 if __name__ == "__main__":
-    TestClass().run()
+    lympha.mainfunc()
+    #TestClass().run()
 
 
 
