@@ -210,6 +210,8 @@ def mapfunc():
 				endstring = str()
 				strr=str("%s" % object_list[key].name)
 				strr = re.sub("\s+", "", strr.strip())
+
+				title = object_list[key].name
 				if str(start) == strr :
 					print("mapfunvc")
 					if object_list[key].flow == 0 or object_list[key].statement_flow == 0:
@@ -682,6 +684,15 @@ def lexer():
 	filenames = prefilenames
 	starts = prestarts
 
+	if local_files == True:
+		for afilename in filenames:
+			textfile = open(filename, 'r')
+			filetext = textfile.read()
+			filetext = stripComments(filetext)
+			filetext = filetext.replace('\n', ' ')
+			filetext = filetext.replace('  ', ' ')
+			series.extend(filetext.split(';'))
+######
 
 ######
 	global object_list
