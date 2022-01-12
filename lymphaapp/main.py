@@ -213,7 +213,7 @@ def mapfunc():
 
 				title = object_list[key].name
 				if str(start) == strr :
-					print("mapfunvc")
+					# # # #print("mapfunvc")
 					if object_list[key].flow == 0 or object_list[key].statement_flow == 0:
 						pre_statement_flow = 0
 					else:
@@ -858,7 +858,7 @@ def lexer():
 	
 						#For non-binary values and equations
 							elif sides[0] != ""  and sides[1] != "" :
-								print("YYY %s" % object_list[key].name)
+								# # # #print("YYY %s" % object_list[key].name)
 								#if 0 == len(operator_chop) :
 								object_list[key].statement_value = sides[1] 
 								object_list[key].datatype = "valu"                               
@@ -878,19 +878,19 @@ def mainfunc():
 	global prefilenames 
 	global prestarts 
 
-	print("1xxx")
+	 # # #print("1xxx")
 	sys.argv = list()
 	sys.argv = ["-f", "CRB65.lympha","-steps", "5", "-exe", "-start", "meeting."]
 	argv_len=len(sys.argv)
 	#if __name__=='__main__':
-	#	print("1.1")
+	#	 # # #print("1.1")
 	for x in range(0, argv_len):
-			print("1.1.1")
+			# # # #print("1.1.1")
 			if sys.argv[x] == "-f":
 				filename = sys.argv[x+1]
 				prefilenames.append(filename)
 				filecheck = True
-				print("1.1.1.1")
+				# # # #print("1.1.1.1")
 			if sys.argv[x] == "-h":
 				print ('-h for help\n-f file\n-graph\n-start "start node"\n-steps amount of steps')
 			if sys.argv[x] == "-exe":
@@ -907,7 +907,7 @@ def mainfunc():
 	#if filecheck == True:
 	#		lexer()
 	#else:
-	#		print("Please add file names.")
+	#		# # # #print("Please add file names.")
 
 	#temporary_starts = list()
 	#for start in temporary_starts :
@@ -916,7 +916,7 @@ def mainfunc():
 	nextstates = list()
 	theturn = 1
 	mapfunc()
-	print("end")
+	 # #print("end")
 	#Finding objects in 
 	#factorform = document['factorlist']
 ''''
@@ -925,7 +925,7 @@ def mainfunc():
 				if object_list[k].name == start :
 					object_list[k].flow = 1
 					object_list[k].statement_flow = 1
-		print("3")
+		# # #print("3")
 		for ztep in range(0, int(steps)) :
 			#alert("aaa0")
 			if theturn < 3:
@@ -962,7 +962,7 @@ def mainfunc():
 			if theturn == 2:
 				theturn = 3
 '''
-	#print("end")
+	# # #print("end")
 
 
 def turn2func(ev) :
@@ -1031,6 +1031,7 @@ class ScreenOne(Screen):
     
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
+        mainfunc()
         global sc1
         global title
         self.switch = Switch()
@@ -1061,8 +1062,8 @@ class ScreenOne(Screen):
     def oking(self,*args):
         mainfunc()
         global sc1
-        if self.switch.active :
-            print("hello")
+        #if self.switch.active :
+            # # #print("hello")
         Clock.unschedule(self.__init__())
         #self.manager.current = 'screen1'
 
