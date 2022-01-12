@@ -30,7 +30,9 @@ def recursive_parse(node,substitutions):
 	else:
 		recursive_parse(node.right,substitutions)
 
-
+title = str()
+prefilenames = list()
+prestarts = list()	
 
 # Variables for " 1. Program call through bash-CLI.".
 CLI_filename = ""
@@ -162,6 +164,7 @@ def mapfunc():
 	#global d3
 	#global UI
 	#global CLI_filename 
+	global title
 	global argv_len 
 	global filename 
 	global filenames 
@@ -193,18 +196,22 @@ def mapfunc():
 	#if mode_graph == True:
 	graphstr = 'digraph lympha {\nnode [shape=record];'
 	#ADDED INT IN INT(STEPS)
-	print("mapfunvc")
+
+	global prefilenames 
+	global prestarts 
+	filenames = prefilenames
+	starts = prestarts
+
 	for step in range(0, int(steps)):
 		#nextstates = list()
 		checked = 0 
-		#alert("zero")
 		for start in starts:
 			for key in range(0,len(object_list)):
 				endstring = str()
 				strr=str("%s" % object_list[key].name)
 				strr = re.sub("\s+", "", strr.strip())
 				if str(start) == strr :
-
+					print("mapfunvc")
 					if object_list[key].flow == 0 or object_list[key].statement_flow == 0:
 						pre_statement_flow = 0
 					else:
@@ -216,11 +223,11 @@ def mapfunc():
 								object_list[key].flow = 1
 								object_list[key].statement_flow = 1
 							if mode_exe == True :	
-								main.ScreenOne.procedure(object_list[key].name)
-								
+								#ScreenOne.procedure(object_list[key].name)
+								title = object_list[key].name
 						else:
-							main.ScreenOne.procedure(object_list[key].name)
-							        
+							#ScreenOne.procedure(object_list[key].name)
+							title = object_list[key].name							        
 							if object_list[key].flow == 1 or object_list[key].statement_flow == 1:
 								pre_statement_flow = 1
 							else:
@@ -631,9 +638,9 @@ def mapfunc():
 	CLI_filename = None
 	argv_len = None
 	filename = None
-	#filenames = None
+	filenames = None
 	#filenames = list()
-	#starts = None
+	starts = None
 	steps = None
 	mode_graph = None
 	mode_state = None
@@ -656,18 +663,25 @@ def mapfunc():
 	#object_list = None
 	exe_objects = None
 	
-	#del CLI_filename, argv_len, filename, filenames, starts, steps, mode_graph, mode_state, filecheck, mode_exe, mode_show, mode_map, exe_list, show_list, map_list, substates, nextstates, specs, global_relative_variable1, global_relative_variable2, operator1, statement_flow, statement_value, exe_objects, object_list,
+	del CLI_filename, argv_len, filename, filenames, starts, steps, mode_graph, mode_state, filecheck, mode_exe, mode_show, mode_map, exe_list, show_list, map_list, substates, nextstates, specs, global_relative_variable1, global_relative_variable2, operator1, statement_flow, statement_value, exe_objects,# object_list,
 
 def stripComments(code):
 	code = str(code)
 	return re.sub(r'(?m)^ *#.*\n?', '', code)
 
 def lexer():
+
 	global CLIcom_segment
 	global series
 	global filenames
 	global local_files
 	#Load file content
+
+	global prefilenames 
+	global prestarts 
+	filenames = prefilenames
+	starts = prestarts
+
 
 ######
 	global object_list
@@ -850,7 +864,10 @@ def mainfunc():
 	global mode_exe  
 	global starts
 	global steps
-	print("1")
+	global prefilenames 
+	global prestarts 
+
+	print("1xxx")
 	sys.argv = list()
 	sys.argv = ["-f", "CRB65.lympha","-steps", "5", "-exe", "-start", "meeting."]
 	argv_len=len(sys.argv)
@@ -860,7 +877,7 @@ def mainfunc():
 			print("1.1.1")
 			if sys.argv[x] == "-f":
 				filename = sys.argv[x+1]
-				filenames.append(filename)
+				prefilenames.append(filename)
 				filecheck = True
 				print("1.1.1.1")
 			if sys.argv[x] == "-h":
@@ -874,7 +891,7 @@ def mainfunc():
 			if sys.argv[x] == "-steps":
 				steps = int(sys.argv[x+1])
 			if sys.argv[x] == "-start":
-				starts.append(sys.argv[x+1])
+				prestarts.append(sys.argv[x+1])
 		# Execute functions that are connected to the arguments:
 	#if filecheck == True:
 	#		lexer()
@@ -1004,7 +1021,7 @@ class ScreenOne(Screen):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         global sc1
-
+        global title
         self.switch = Switch()
         h_box = BoxLayout(orientation='horizontal')
         v_box = BoxLayout(orientation='vertical')
@@ -1013,7 +1030,9 @@ class ScreenOne(Screen):
                                #kivy doesnt crashes because it creates the property automatically
         #for message in my_show_list:
         switch_box = BoxLayout(orientation='vertical')
-        label = Label(text='text')
+        #label = Label(text='text')
+        text = title
+        label = Label(text=text)
         #switch = Switch()
         #switch.bind(active=callback)
         switch_box.add_widget(label)
@@ -1026,20 +1045,21 @@ class ScreenOne(Screen):
         okbtn.bind(on_press=self.oking)
         v_box.add_widget(okbtn)            
         self.add_widget(v_box)
-        mainfunc()
+
 
     def oking(self,*args):
+        mainfunc()
         global sc1
-
         if self.switch.active :
             print("hello")
         Clock.unschedule(self.__init__())
         #self.manager.current = 'screen1'
 
-    def procedure(self,*args,title):
+    def procedure(self,*args):
         super().__procedure__(**kwargs)
+        mainfunc()
         global sc1
-
+        global title
         self.switch = Switch()
         h_box = BoxLayout(orientation='horizontal')
         v_box = BoxLayout(orientation='vertical')
