@@ -447,10 +447,10 @@ def mapfunc():
 								else:
 										pre_statement_flow = 0
 
-								document <= html.BR()
-								document <= str("%s = "%object_list[key].name)
+								#document <= html.BR()
+								#document <= str("%s = "%object_list[key].name)
 								
-								document <= html.BR()
+								#document <= html.BR()
 
 							object_list[key].statement_flow = int(pre_statement_flow)
    
