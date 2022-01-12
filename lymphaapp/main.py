@@ -631,8 +631,9 @@ def mapfunc():
 	CLI_filename = None
 	argv_len = None
 	filename = None
-	filenames = None
-	starts = None
+	#filenames = None
+	#filenames = list()
+	#starts = None
 	steps = None
 	mode_graph = None
 	mode_state = None
@@ -643,7 +644,7 @@ def mapfunc():
 	exe_list = None
 	show_list = None
 	map_list = None
-	series = None
+	#series = None
 	substates = None
 	nextstates = None
 	specs = None
@@ -652,10 +653,10 @@ def mapfunc():
 	operator1 = None
 	statement_flow = None
 	statement_value = None
-	object_list = None
+	#object_list = None
 	exe_objects = None
 	
-	del CLI_filename, argv_len, filename, filenames, starts, steps, mode_graph, mode_state, filecheck, mode_exe, mode_show, mode_map, exe_list, show_list, map_list, substates, nextstates, specs, global_relative_variable1, global_relative_variable2, operator1, statement_flow, statement_value, exe_objects, object_list,
+	#del CLI_filename, argv_len, filename, filenames, starts, steps, mode_graph, mode_state, filecheck, mode_exe, mode_show, mode_map, exe_list, show_list, map_list, substates, nextstates, specs, global_relative_variable1, global_relative_variable2, operator1, statement_flow, statement_value, exe_objects, object_list,
 
 def stripComments(code):
 	code = str(code)
@@ -844,6 +845,7 @@ def lexer():
 		count += 1          
 
 def mainfunc():
+	global filenames
 	global filecheck
 	global mode_exe  
 	global starts
@@ -857,8 +859,7 @@ def mainfunc():
 	for x in range(0, argv_len):
 			print("1.1.1")
 			if sys.argv[x] == "-f":
-				CLI_filename = sys.argv[x+1]
-				filename = CLI_filename
+				filename = sys.argv[x+1]
 				filenames.append(filename)
 				filecheck = True
 				print("1.1.1.1")
@@ -994,7 +995,7 @@ from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.clock import Clock
 
 #from lympha import *
-import lympha as lympha
+#import lympha as lympha
 
 sm = ScreenManager()
 
