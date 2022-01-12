@@ -160,6 +160,7 @@ def mapfunc():
 	#global d3
 	#global UI
 	#global CLI_filename 
+	global sc1
 	global title
 	global argv_len 
 	global filename 
@@ -208,6 +209,8 @@ def mapfunc():
 				strr = re.sub("\s+", "", strr.strip())
 
 				title = object_list[key].name
+				#sm.add_widget(sc1)
+				#return sm
 				if str(start) == strr :
 					# # # #print("mapfunvc")
 					if object_list[key].flow == 0 or object_list[key].statement_flow == 0:
@@ -1044,26 +1047,25 @@ class TestClass(App):
 					prefilenames.append(filename)
 					filecheck = True
 				if sys.argv[x] == "-steps":
-					presteps = int(sys.argv[x+1])
+					steps = int(sys.argv[x+1])
 				if sys.argv[x] == "-start":
 					prestarts.append(sys.argv[x+1])
 					starts.append(sys.argv[x+1])
 			global sc1
-			steps = 1
+			#steps = 1
 			lexer()
 			nextstates = list()
-			for step in range(0, int(presteps)):
-					for start in prestarts:
-						mapfunc()
-						sm.add_widget(sc1)
+			#for step in range(0, int(presteps)):
+					#for start in prestarts:
+						#mapfunc()
+						#sm.add_widget(sc1)
 
-						return sm
+						#return sm
 
-        
-        
-			#sm.add_widget(sc1)
-
-			#return sm
+			mapfunc()
+###???
+			sm.add_widget(sc1)
+			return sm
 
  
         
