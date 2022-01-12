@@ -220,13 +220,13 @@ def mapfunc():
 						if object_list[key].name[-1] != "?":
 ######28
 							pre_statement_flow = 0
-
+							title = object_list[key].name
 							if step == 0 :
 								object_list[key].flow = 1
 								object_list[key].statement_flow = 1
-							if mode_exe == True :	
+							#if mode_exe == True :	
 								#ScreenOne.procedure(object_list[key].name)
-								title = object_list[key].name
+								#title = object_list[key].name
 						else:
 							#ScreenOne.procedure(object_list[key].name)
 							title = object_list[key].name							        
@@ -286,7 +286,7 @@ def mapfunc():
 										object_list[key].statement_value = ("score: %s\nthreshold: %s" % (sum1, object_list[key].global_relative_variable1))
 									else:
 										pre_statement_flow = 0
-									print(object_list[key].statement_value)
+									#print(object_list[key].statement_value)
 								object_list[key].statement_flow = int(pre_statement_flow)       
 								checked = 1
 
@@ -351,7 +351,7 @@ def mapfunc():
 				
 							eqlist = list()
 							for varWord in iteratorUntouched:
-								print(varWord)
+								#print(varWord)
 								checked = 0
 								for objWord in range(len(object_list)):
 									thename = object_list[objWord].name
@@ -466,7 +466,7 @@ def mapfunc():
 				
 							eqlist = list()
 							for varWord in iteratorUntouched:
-								print(varWord)
+								#print(varWord)
 								checked = 0
 								for objWord in range(len(object_list)):
 									thename = object_list[objWord].name
@@ -484,22 +484,22 @@ def mapfunc():
 							pre_statement_flow = 0
 							try:
 								if object_list[key].operator1 == "equiv" and int(object_list[key].global_relative_variable1) == int(str(endnum)):
-										print ("%s == %s ; exe" % (int(object_list[key].global_relative_variable1), int(str(endnum))))
+										#print ("%s == %s ; exe" % (int(object_list[key].global_relative_variable1), int(str(endnum))))
 										pre_statement_flow = 1
 								elif object_list[key].operator1 == "leq" and int(object_list[key].global_relative_variable1) >= int((endnum)):
-										print ("%s >= %s ; exe" % (int(object_list[key].global_relative_variable1), int(str(endnum))))
+										#print ("%s >= %s ; exe" % (int(object_list[key].global_relative_variable1), int(str(endnum))))
 										pre_statement_flow = 1
 								elif object_list[key].operator1 == "geq" and (int(object_list[key].global_relative_variable1) <= int(str(endnum))):
-										print ("%s <= %s ; exe" % (int(object_list[key].global_relative_variable1), int(str(endnum))))
+										#print ("%s <= %s ; exe" % (int(object_list[key].global_relative_variable1), int(str(endnum))))
 										pre_statement_flow = 1
 								elif object_list[key].operator1 == "no" and int(object_list[key].global_relative_variable1) != int(str(endnum)):
-										print ("%s != %s ; exe" % (int(object_list[key].global_relative_variable1), int(str(endnum))))
+										#print ("%s != %s ; exe" % (int(object_list[key].global_relative_variable1), int(str(endnum))))
 										pre_statement_flow = 1
 								elif object_list[key].operator1 == "g" and int(object_list[key].global_relative_variable1) < int(str(endnum)):
-										print ("%s < %s ; exe" % (int(object_list[key].global_relative_variable1), int(str(endnum))))
+										#print ("%s < %s ; exe" % (int(object_list[key].global_relative_variable1), int(str(endnum))))
 										pre_statement_flow = 1
 								elif object_list[key].operator1 == "l" and int(object_list[key].global_relative_variable1) > int(str(endnum)):
-										print ("%s > %s ; exe" % (int(object_list[key].global_relative_variable1), int(str(endnum))))
+										#print ("%s > %s ; exe" % (int(object_list[key].global_relative_variable1), int(str(endnum))))
 										pre_statement_flow = 1
 								else:
 										pre_statement_flow = 0
@@ -508,22 +508,22 @@ def mapfunc():
 								endnum = float(eval(str(endstring)))
 
 								if object_list[key].operator1 == "equiv" and float(object_list[key].global_relative_variable1) == float(str(endnum)):
-										print ("%s == %s ; exe" % (float(object_list[key].global_relative_variable1), float(str(endnum))))
+										#print ("%s == %s ; exe" % (float(object_list[key].global_relative_variable1), float(str(endnum))))
 										pre_statement_flow = 1
 								elif object_list[key].operator1 == "leq" and float(object_list[key].global_relative_variable1) <= float((endnum)):
-										print ("%s <= %s ; exe" % (float(object_list[key].global_relative_variable1), float(str(endnum))))
+										#print ("%s <= %s ; exe" % (float(object_list[key].global_relative_variable1), float(str(endnum))))
 										pre_statement_flow = 1
 								elif object_list[key].operator1 == "geq" and (float(object_list[key].global_relative_variable1) >= float(str(endnum))):
-										print ("%s >= %s ; exe" % (float(object_list[key].global_relative_variable1), float(str(endnum))))
+										#print ("%s >= %s ; exe" % (float(object_list[key].global_relative_variable1), float(str(endnum))))
 										pre_statement_flow = 1
 								elif object_list[key].operator1 == "no" and float(object_list[key].global_relative_variable1) != float(str(endnum)):
-										print ("%s != %s ; exe" % (float(object_list[key].global_relative_variable1), float(str(endnum))))
+										#print ("%s != %s ; exe" % (float(object_list[key].global_relative_variable1), float(str(endnum))))
 										pre_statement_flow = 1
 								elif object_list[key].operator1 == "g" and float(object_list[key].global_relative_variable1) < float(str(endnum)):
-										print ("%s < %s ; exe" % (float(object_list[key].global_relative_variable1), float(str(endnum))))
+										#print ("%s < %s ; exe" % (float(object_list[key].global_relative_variable1), float(str(endnum))))
 										pre_statement_flow = 1
 								elif object_list[key].operator1 == "l" and float(object_list[key].global_relative_variable1) > float(str(endnum)):
-										print ("%s > %s ; exe" % (float(object_list[key].global_relative_variable1), float(str(endnum))))
+										#print ("%s > %s ; exe" % (float(object_list[key].global_relative_variable1), float(str(endnum))))
 										pre_statement_flow = 1
 								else:
 										pre_statement_flow = 0
@@ -784,8 +784,8 @@ def lexer():
 						nexting = arrowobj[i].replace(" ","")
 						if not nexting == "" :
 							object_list[key].next_list.append(nexting)
-						print(object_list[key].next_list)
-						print(object_list[key].name)
+						#print(object_list[key].next_list)
+						#print(object_list[key].name)
 	#Connect to depending objects:
 	#Types of continuations of the side2 string:
 	# 1. Operator + Sum of binaries
@@ -825,7 +825,7 @@ def lexer():
 									object_list[key].operator1="g"
 								if re.compile(".*<.*").match(sides[1]) and not re.compile(r"(<=)").match(sides[1]) :
 									object_list[key].operator1="l"
-								print(object_list[key].operator1)
+								#print(object_list[key].operator1)
 								preop = sides[1].replace(" ","")
 								bin_chopped = 0
 								if "\|{" in preop or "|{" in preop :
@@ -891,14 +891,14 @@ def mainfunc():
 				prefilenames.append(filename)
 				filecheck = True
 				# # # #print("1.1.1.1")
-			if sys.argv[x] == "-h":
-				print ('-h for help\n-f file\n-graph\n-start "start node"\n-steps amount of steps')
-			if sys.argv[x] == "-exe":
-				mode_exe = True
-			if sys.argv[x] == "-graph":
-				mode_graph = True                    
-			if sys.argv[x] == "-statements":
-				mode_state = True    
+#			if sys.argv[x] == "-h":
+				#print ('-h for help\n-f file\n-graph\n-start "start node"\n-steps amount of steps')
+#			if sys.argv[x] == "-exe":
+#				mode_exe = True
+#			if sys.argv[x] == "-graph":
+#				mode_graph = True                    
+#			if sys.argv[x] == "-statements":
+#				mode_state = True    
 			if sys.argv[x] == "-steps":
 				steps = int(sys.argv[x+1])
 			if sys.argv[x] == "-start":
@@ -1065,6 +1065,31 @@ class ScreenOne(Screen):
         #if self.switch.active :
             # # #print("hello")
         Clock.unschedule(self.__init__())
+        global sc1
+        global title
+        self.switch = Switch()
+        h_box = BoxLayout(orientation='horizontal')
+        v_box = BoxLayout(orientation='vertical')
+        #my_show_list = ["My Way", "Wine Drinker", "Boots"]
+        h_box.my_buttons = [] # if you want to keep an "easy" reference to your buttons to do something with them later
+                               #kivy doesnt crashes because it creates the property automatically
+        #for message in my_show_list:
+        switch_box = BoxLayout(orientation='vertical')
+        label = Label(text=title)
+        #switch = Switch()
+        #switch.bind(active=callback)
+        switch_box.add_widget(label)
+        switch_box.add_widget(self.switch)
+        #h_box.my_buttons.append(switch_box)
+        h_box.add_widget(switch_box)
+        v_box.add_widget(h_box)            
+        #self.add_widget(h_box)            
+        okbtn = Button(text="OK")
+        okbtn.bind(on_press=self.oking)
+        v_box.add_widget(okbtn)            
+        self.add_widget(v_box)               
+
+
         #self.manager.current = 'screen1'
 
     def procedure(self,*args):
