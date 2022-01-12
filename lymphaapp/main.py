@@ -10,12 +10,8 @@ import sys
 #for the graph function:
 import os
 
-
 #regex
 import re
-
-#Web version skip
-#			theturn = 1
 
 def recursive_parse(node,substitutions):
 	if hasattr(node.left,"id"):
@@ -869,101 +865,6 @@ def lexer():
 					pass
 		count += 1          
 
-def mainfunc():
-	global filenames
-	global filecheck
-	global mode_exe  
-	global starts
-	global steps
-	global prefilenames 
-	global prestarts 
-
-	 # # #print("1xxx")
-	sys.argv = list()
-	sys.argv = ["-f", "CRB65.lympha","-steps", "5", "-exe", "-start", "meeting."]
-	argv_len=len(sys.argv)
-	#if __name__=='__main__':
-	#	 # # #print("1.1")
-	for x in range(0, argv_len):
-			# # # #print("1.1.1")
-			if sys.argv[x] == "-f":
-				filename = sys.argv[x+1]
-				prefilenames.append(filename)
-				filecheck = True
-				# # # #print("1.1.1.1")
-#			if sys.argv[x] == "-h":
-				#print ('-h for help\n-f file\n-graph\n-start "start node"\n-steps amount of steps')
-#			if sys.argv[x] == "-exe":
-#				mode_exe = True
-#			if sys.argv[x] == "-graph":
-#				mode_graph = True                    
-#			if sys.argv[x] == "-statements":
-#				mode_state = True    
-			if sys.argv[x] == "-steps":
-				steps = int(sys.argv[x+1])
-			if sys.argv[x] == "-start":
-				prestarts.append(sys.argv[x+1])
-		# Execute functions that are connected to the arguments:
-	#if filecheck == True:
-	#		lexer()
-	#else:
-	#		# # # #print("Please add file names.")
-
-	#temporary_starts = list()
-	#for start in temporary_starts :
-	#	starts.append(start)
-	lexer()
-	nextstates = list()
-	theturn = 1
-	mapfunc()
-	 # #print("end")
-	#Finding objects in 
-	#factorform = document['factorlist']
-''''
-	for start in temporary_starts :
-		for k in range(0,len(object_list)):
-				if object_list[k].name == start :
-					object_list[k].flow = 1
-					object_list[k].statement_flow = 1
-		# # #print("3")
-		for ztep in range(0, int(steps)) :
-			#alert("aaa0")
-			if theturn < 3:
-				for start in temporary_starts :
-	
-					for k in range(0,len(object_list)):
-					#alert("aa4 [%s]" % object_list[k].name)
-						if object_list[k].name==start and (object_list[k].name[-1] == "?") :
-							object_list[k].flow = 0 
-							object_list[k].statement_flow = 0 
-							object_list[k].statement_flow = 0
-							object_list[k].flow = 0
-							factorform <= str("%s = "% object_list[k].name)
-							factorform <= html.INPUT(Type="text", Id=(object_list[k].name),Class="factorItems")
-							factorform <= html.BR()
-							theturn = 2
-
-
-						#Loading the next starts from the current starts.
-						if object_list[k].name==start :
-							for nexting in object_list[k].next_list :
-								for l in range(0,len(object_list)):  
-									if object_list[l].name == nexting :          
-										nextstates.append(nexting)
-
-
-			#Make new starts. Should be done after each starts-loop
-			del temporary_starts[:]
-			for nexting in nextstates: 
-				if nexting not in temporary_starts: 
-					temporary_starts.append(nexting) 
-			del nextstates[:]
-  	       	#After each set of start loops a validation of theturn should be done.
-			if theturn == 2:
-				theturn = 3
-'''
-	# # #print("end")
-
 
 def turn2func(ev) :
 #The goal is to implement the first step factors
@@ -1031,7 +932,7 @@ class ScreenOne(Screen):
     
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        mainfunc()
+        #mainfunc()
         global sc1
         global title
         self.switch = Switch()
@@ -1060,7 +961,7 @@ class ScreenOne(Screen):
 
 
     def oking(self,*args):
-        mainfunc()
+        #mainfunc()
         global sc1
         #if self.switch.active :
             # # #print("hello")
@@ -1094,7 +995,7 @@ class ScreenOne(Screen):
 
     def procedure(self,*args):
         super().__procedure__(**kwargs)
-        mainfunc()
+        #mainfunc()
         global sc1
         global title
         self.switch = Switch()
@@ -1123,7 +1024,35 @@ class ScreenOne(Screen):
 sc1 = ScreenOne(name='screen1')
 
 class TestClass(App):
-    def build(self):
+		def build(self):
+			#mainfunc()
+			global filenames
+			global filecheck
+			global mode_exe  
+			global starts
+			global steps
+			global prefilenames 
+			global prestarts 
+			sys.argv = list()
+			sys.argv = ["-f", "CRB65.lympha","-steps", "5", "-exe", "-start", "meeting."]
+			argv_len=len(sys.argv)
+			for x in range(0, argv_len):
+				if sys.argv[x] == "-f":
+					filename = sys.argv[x+1]
+					prefilenames.append(filename)
+					filecheck = True
+				if sys.argv[x] == "-steps":
+					presteps = int(sys.argv[x+1])
+				if sys.argv[x] == "-start":
+					prestarts.append(sys.argv[x+1])
+					starts.append(sys.argv[x+1])
+				steps = 1
+				lexer()
+				nextstates = list()
+				for step in range(0, int(presteps)):
+					for start in prestarts:
+						mapfunc()
+
         global sc1
         
         
