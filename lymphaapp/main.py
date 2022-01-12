@@ -36,7 +36,7 @@ argv_len = len(sys.argv)
 filenames = list()
 filename = ""
 
-
+presteps = int()
 
 # List of statements that should be executed during step 0:
 starts = list()
@@ -639,7 +639,7 @@ def mapfunc():
 	filenames = None
 	#filenames = list()
 	starts = None
-	steps = None
+	#steps = None
 	mode_graph = None
 	mode_state = None
 	filecheck = None
@@ -661,7 +661,7 @@ def mapfunc():
 	#object_list = None
 	exe_objects = None
 	
-	del CLI_filename, argv_len, filename, filenames, starts, steps, mode_graph, mode_state, filecheck, mode_exe, mode_show, mode_map, exe_list, show_list, map_list, substates, nextstates, specs, global_relative_variable1, global_relative_variable2, operator1, statement_flow, statement_value, exe_objects,# object_list,
+	del CLI_filename, argv_len, filename, filenames, starts, mode_graph, mode_state, filecheck, mode_exe, mode_show, mode_map, exe_list, show_list, map_list, substates, nextstates, specs, global_relative_variable1, global_relative_variable2, operator1, statement_flow, statement_value, exe_objects,# object_list, steps, 
 
 def stripComments(code):
 	code = str(code)
@@ -1033,9 +1033,11 @@ class TestClass(App):
 			global steps
 			global prefilenames 
 			global prestarts 
+			global presteps
 			sys.argv = list()
 			sys.argv = ["-f", "CRB65.lympha","-steps", "5", "-exe", "-start", "meeting."]
 			argv_len=len(sys.argv)
+
 			for x in range(0, argv_len):
 				if sys.argv[x] == "-f":
 					filename = sys.argv[x+1]
@@ -1046,19 +1048,22 @@ class TestClass(App):
 				if sys.argv[x] == "-start":
 					prestarts.append(sys.argv[x+1])
 					starts.append(sys.argv[x+1])
-				steps = 1
-				lexer()
-				nextstates = list()
-				for step in range(0, int(presteps)):
+			global sc1
+			steps = 1
+			lexer()
+			nextstates = list()
+			for step in range(0, int(presteps)):
 					for start in prestarts:
 						mapfunc()
+						sm.add_widget(sc1)
 
-        global sc1
+						return sm
+
         
         
-        sm.add_widget(sc1)
+			#sm.add_widget(sc1)
 
-        return sm
+			#return sm
 
  
         
