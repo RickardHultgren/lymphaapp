@@ -361,7 +361,7 @@ def mapfunc():
 								if checked == 0:
 									eqlist.append(varWord) 
 							endstring = (("").join(eqlist))                             
-							endstring = str(eval(str(endstring)))
+							endstring = str(endstring)
 							object_list[key].statement_value = endstring
 
 
@@ -685,7 +685,7 @@ def lexer():
 	starts = prestarts
 
 	if local_files == True:
-		for afilename in filenames:
+		for filename in filenames:
 			textfile = open(filename, 'r')
 			filetext = textfile.read()
 			filetext = stripComments(filetext)
