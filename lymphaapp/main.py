@@ -222,6 +222,7 @@ def mapfunc():
 
 	for step in range(0, int(steps)):
 		#nextstates = list()
+		#print("Steps: %s" % steps)
 		checked = 0 
 		for start in starts:
 			for key in range(0,len(object_list)):
@@ -229,12 +230,13 @@ def mapfunc():
 				strr=str("%s" % object_list[key].name)
 				strr = re.sub("\s+", "", strr.strip())
 
-				title = object_list[key].name
+
 				#sm.add_widget(sc1)
 				#Clock.unschedule(sc1.__init__())
 				#return sm
 				if str(start) == strr :
 					# # # #print("mapfunvc")
+					title = object_list[key].name
 					if object_list[key].flow == 0 or object_list[key].statement_flow == 0:
 						pre_statement_flow = 0
 					else:
@@ -938,94 +940,106 @@ def turn2func(ev) :
 
 class ScreenOne(Screen):
     
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
+		def __init__(self, **kwargs):
+				super().__init__(**kwargs)
         #mainfunc()
-        global sc1
-        global title
-        self.switch = Switch()
-        h_box = BoxLayout(orientation='horizontal')
-        v_box = BoxLayout(orientation='vertical')
+				global sc1
+				global title
+				self.switch = Switch()
+				h_box = BoxLayout(orientation='horizontal')
+				v_box = BoxLayout(orientation='vertical')
         #my_show_list = ["My Way", "Wine Drinker", "Boots"]
-        h_box.my_buttons = [] # if you want to keep an "easy" reference to your buttons to do something with them later
+				h_box.my_buttons = [] # if you want to keep an "easy" reference to your buttons to do something with them later
                                #kivy doesnt crashes because it creates the property automatically
         #for message in my_show_list:
-        switch_box = BoxLayout(orientation='vertical')
+				switch_box = BoxLayout(orientation='vertical')
         #label = Label(text='text')
-        text = title
-        label = Label(text=text)
+				text = title
+				label = Label(text=text)
         #switch = Switch()
         #switch.bind(active=callback)
-        switch_box.add_widget(label)
-        switch_box.add_widget(self.switch)
+				switch_box.add_widget(label)
+				switch_box.add_widget(self.switch)
         #h_box.my_buttons.append(switch_box)
-        h_box.add_widget(switch_box)
-        v_box.add_widget(h_box)            
+				h_box.add_widget(switch_box)
+				v_box.add_widget(h_box)            
         #self.add_widget(h_box)            
-        okbtn = Button(text="OK")
-        okbtn.bind(on_press=self.oking)
-        v_box.add_widget(okbtn)            
-        self.add_widget(v_box)
+				okbtn = Button(text="OK")
+				okbtn.bind(on_press=self.oking)
+				v_box.add_widget(okbtn)            
+				self.add_widget(v_box)
 
 
-    def oking(self,*args):
+		def oking(self,*args):
         #mainfunc()
-        global sc1
+				global sc1
         #if self.switch.active :
             # # #print("hello")
-        Clock.unschedule(self.__init__())
-        global sc1
-        global title
-        self.switch = Switch()
-        h_box = BoxLayout(orientation='horizontal')
-        v_box = BoxLayout(orientation='vertical')
+				Clock.unschedule(self.__init__())
+				global sc1
+				global title
+				self.switch = Switch()
+				h_box = BoxLayout(orientation='horizontal')
+				v_box = BoxLayout(orientation='vertical')
         #my_show_list = ["My Way", "Wine Drinker", "Boots"]
-        h_box.my_buttons = [] # if you want to keep an "easy" reference to your buttons to do something with them later
+				h_box.my_buttons = [] # if you want to keep an "easy" reference to your buttons to do something with them later
                                #kivy doesnt crashes because it creates the property automatically
-        #for message in my_show_list:
-        switch_box = BoxLayout(orientation='vertical')
-        label = Label(text=title)
-        #switch = Switch()
-        #switch.bind(active=callback)
-        switch_box.add_widget(label)
-        switch_box.add_widget(self.switch)
-        #h_box.my_buttons.append(switch_box)
-        h_box.add_widget(switch_box)
-        v_box.add_widget(h_box)            
-        #self.add_widget(h_box)            
-        okbtn = Button(text="OK")
-        okbtn.bind(on_press=self.oking)
-        v_box.add_widget(okbtn)            
-        self.add_widget(v_box)               
+				#for message in my_show_list:
+				switch_box = BoxLayout(orientation='vertical')
+				#label = Label(text=title)
+				#switch = Switch()
+				#switch.bind(active=callback)
+				switch_box.add_widget(label)
+				switch_box.add_widget(self.switch)
+				#h_box.my_buttons.append(switch_box)
+				h_box.add_widget(switch_box)
+				v_box.add_widget(h_box)            
+				#self.add_widget(h_box)            
+				okbtn = Button(text="OK")
+        #okbtn.bind(on_press=self.oking)
+				try:
+					for start in prestarts:
+						mapfunc()
+						label = Label(text=title)
+						sm.add_widget(sc1)
+						#sys.exit()
+						return sm
+				except:		
+					pass
+				okbtn.bind(on_press=self.oking)
+				v_box.add_widget(okbtn)            
+				self.add_widget(v_box)               
         #self.manager.current = 'screen1'
 
-
-    def procedure(self,*args):
-        super().__procedure__(**kwargs)
-        #mainfunc()
-        global sc1
-        global title
-        self.switch = Switch()
-        h_box = BoxLayout(orientation='horizontal')
-        v_box = BoxLayout(orientation='vertical')
-        #my_show_list = ["My Way", "Wine Drinker", "Boots"]
-        h_box.my_buttons = [] # if you want to keep an "easy" reference to your buttons to do something with them later
+		def breaking(self,*args):
+				return
+      
+		def procedure(self,*args):
+				super().__procedure__(**kwargs)
+				#mainfunc()
+				global sc1
+				global title
+				self.switch = Switch()
+				h_box = BoxLayout(orientation='horizontal')
+				v_box = BoxLayout(orientation='vertical')
+				#my_show_list = ["My Way", "Wine Drinker", "Boots"]
+				h_box.my_buttons = [] # if you want to keep an "easy" reference to your buttons to do something with them later
                                #kivy doesnt crashes because it creates the property automatically
         #for message in my_show_list:
-        switch_box = BoxLayout(orientation='vertical')
-        label = Label(text=title)
+				switch_box = BoxLayout(orientation='vertical')
+				label = Label(text=title)
         #switch = Switch()
         #switch.bind(active=callback)
-        switch_box.add_widget(label)
-        switch_box.add_widget(self.switch)
+				switch_box.add_widget(label)
+				switch_box.add_widget(self.switch)
         #h_box.my_buttons.append(switch_box)
-        h_box.add_widget(switch_box)
-        v_box.add_widget(h_box)            
+				h_box.add_widget(switch_box)
+				v_box.add_widget(h_box)            
         #self.add_widget(h_box)            
-        okbtn = Button(text="OK")
-        okbtn.bind(on_press=self.oking)
-        v_box.add_widget(okbtn)            
-        self.add_widget(v_box)               
+				okbtn = Button(text="OK")
+				okbtn.bind(on_press=self.oking)
+				v_box.add_widget(okbtn)            
+				self.add_widget(v_box)               
 
 
 sc1 = ScreenOne(name='screen1')
@@ -1059,17 +1073,8 @@ class TestClass(App):
 			#steps = 1
 			lexer()
 			nextstates = list()
-			try:
-				#for step in range(0, int(presteps)):
-				
-					for start in prestarts:
-						mapfunc()
-						sm.add_widget(sc1)
 
-					#	return sm
-			except:		
-				pass
-			mapfunc()
+			#mapfunc()
 ###???
 			sm.add_widget(sc1)
 			return sm
