@@ -11,6 +11,7 @@ from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.clock import Clock
 
+
 #from lympha import *
 #import lympha as lympha
 
@@ -465,6 +466,7 @@ class ScreenOne(Screen):
         #okbtn.bind(on_press=self.oking)          
 				okbtn.bind(on_press=self.mapfunc)
 				v_box.add_widget(okbtn)            
+				#self.remove_widget(self.('main'))
 				self.add_widget(v_box)               
 				#self.manager.current = 'screen1'
 
@@ -476,8 +478,8 @@ class ScreenOne(Screen):
 		#global CLI_filename 
 		global start_turn
 		global step_turn
-		global sc1
 		global sm
+		global sc1
 		global title
 		global argv_len 
 		global filename 
@@ -513,17 +515,22 @@ class ScreenOne(Screen):
 
 		global prefilenames 
 		global prestarts 
+		breaking = False
 		filenames = prefilenames
 		starts = prestarts
 		step_count = 0 
+		start_count = 0 
 		for step in range(0, int(steps)):
 			if step_count == step_turn :
+				step_turn += 1
+				step_count += 1
 				#nextstates = list()
 				#print("Steps: %s" % steps)
 				checked = 0 
-				start_count = 0 
 				for start in starts:
 					if start_count == start_turn :
+						start_turn += 1
+						start_count += 1
 						for key in range(0,len(object_list)):
 							endstring = str()
 							strr=str("%s" % object_list[key].name)
@@ -557,7 +564,7 @@ class ScreenOne(Screen):
 										else:
 											pre_statement_flow = 0
 
-										document <= ("NAME: %s" % object_list[key].name)
+										#document <= ("NAME: %s" % object_list[key].name)
 				
 										#For binaries
 										if object_list[key].datatype == "bina":	
@@ -584,7 +591,8 @@ class ScreenOne(Screen):
 													#thename = re.sub("\s+", "", thename.strip())
 													#if object_list[item].name == binobj.replace(" ","") :
 													if thename == ("%s" % binobj.replace(" ","")) :
-														subfactors.append(int(int(object_list[item].value[:-1])))
+														pass
+														#subfactors.append(int(int(object_list[item].value[:-1])))
 											sum1 = subfactors.count(1)
 											sum0 = subfactors.count(0)
 											if object_list[key].operator1 != None: # and object_list[key].statement_flow == None :
@@ -904,8 +912,21 @@ class ScreenOne(Screen):
 								#graphstr += ('"%s" [label="step %s: %s\\n%s", fillcolor=yellow, style=filled] ; \n' % (start,step+1,start,str(graph_string)))
 								title = ('"%s" [label="step %s: %s\\n%s", fillcolor=yellow, style=filled] ; \n' % (start,step+1,start,str(graph_string)))
 
-								Clock.unschedule(sc1.__init__())
-
+							Clock.unschedule(sc1.__init__())
+							breaking = True
+							break
+						if breaking == True :
+							break
+					if breaking == True :
+							break
+				#if breaking == True :
+					#break
+				if breaking == False :
+							     							
+								#return
+								#sm.add_widget(sc1)
+								#sm.current
+								#return sm
 							#alert("before draw2")									
 							#try:	
 							#	for next_object in object_list[key].next_list :
@@ -917,53 +938,53 @@ class ScreenOne(Screen):
 							#	pass
 
 
-				for start in starts :
-					for k in range(0,len(object_list)):
-						if object_list[k].name==start:
-							for nexting in object_list[k].next_list :
-								for l in range(0,len(object_list)):  
-									if object_list[l].name == nexting :          
-										nextstates.append(nexting)									
-					if checked == 0:
+					for start in starts :
 						for k in range(0,len(object_list)):
 							if object_list[k].name==start:
 								for nexting in object_list[k].next_list :
 									for l in range(0,len(object_list)):  
 										if object_list[l].name == nexting :          
-											if object_list[k].flow  == 0 or object_list[k].statement_flow == 0 :
-												object_list[l].flow = 0
-												object_list[l].statement_flow = 0
-						for k in range(0,len(object_list)):
-							if object_list[k].name==start:
-								for nexting in object_list[k].next_list :
-									for l in range(0,len(object_list)):  
-										if object_list[l].name == nexting :         
-							
-											if object_list[k].flow  == 1 or object_list[k].statement_flow == 1 and object_list[l].flow != 0:
-												object_list[l].flow = 1
-												object_list[l].statement_flow = 1
-						checked = 0
-						del starts[:]
-						#starts = list()                           
-						for nexting in nextstates: 
-							if nexting not in starts: 
-								starts.append(nexting) 
-						del nextstates[:]
+											nextstates.append(nexting)									
+						if checked == 0:
+							for k in range(0,len(object_list)):
+								if object_list[k].name==start:
+									for nexting in object_list[k].next_list :
+										for l in range(0,len(object_list)):  
+											if object_list[l].name == nexting :          
+												if object_list[k].flow  == 0 or object_list[k].statement_flow == 0 :
+													object_list[l].flow = 0
+													object_list[l].statement_flow = 0
+							for k in range(0,len(object_list)):
+								if object_list[k].name==start:
+									for nexting in object_list[k].next_list :
+										for l in range(0,len(object_list)):  
+											if object_list[l].name == nexting :         
+								
+												if object_list[k].flow  == 1 or object_list[k].statement_flow == 1 and object_list[l].flow != 0:
+													object_list[l].flow = 1
+													object_list[l].statement_flow = 1
+							checked = 0
+							del starts[:]
+							#starts = list()                           
+							for nexting in nextstates: 
+								if nexting not in starts: 
+									starts.append(nexting) 
+							del nextstates[:]
 #				if mode_graph == True:
 #				graphstr += '}'
 
-						try:
-							graphstr += "}"
+							try:
+								graphstr += "}"
 
-						except:	
-							pass        
+							except:	
+								pass        
 #					open('lympha.dot', 'w').close()
 #					outputfile = open("lympha.dot", "w")
 #					outputfile.write(graphstr)
 #					outputfile.close()
 #					cmd = 'dot lympha.dot -Tps -o lympha.pdf'
 #					os.system(cmd)
-				
+					
 		CLI_filename = None
 		argv_len = None
 		filename = None
@@ -1009,7 +1030,7 @@ class TestClass(App):
 			global prefilenames 
 			#global prestarts 
 			sys.argv = list()
-			sys.argv = ["-f", "CRB65.lympha","-steps", "1", "-exe", "-start", "meeting."]
+			sys.argv = ["-f", "CRB65.lympha","-steps", "5", "-exe", "-start", "meeting."]
 			argv_len=len(sys.argv)
 
 			for x in range(0, argv_len):
