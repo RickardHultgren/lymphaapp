@@ -1,3 +1,23 @@
+
+import kivy
+from kivy.app import App
+from kivy.uix.boxlayout import BoxLayout
+from kivy.uix.button import Button
+from kivy.uix.widget import Widget
+from kivy.uix.button import Button
+from kivy.uix.switch import Switch
+from kivy.uix.label import Label
+from kivy.uix.floatlayout import FloatLayout
+from kivy.uix.screenmanager import ScreenManager, Screen
+from kivy.clock import Clock
+
+#from lympha import *
+#import lympha as lympha
+
+sm = ScreenManager()
+
+
+
 #pfrom browser import document, bind, html, alert, window
 #from javascript import this
 
@@ -161,6 +181,7 @@ def mapfunc():
 	#global UI
 	#global CLI_filename 
 	global sc1
+	global sm
 	global title
 	global argv_len 
 	global filename 
@@ -210,6 +231,7 @@ def mapfunc():
 
 				title = object_list[key].name
 				#sm.add_widget(sc1)
+				#Clock.unschedule(sc1.__init__())
 				#return sm
 				if str(start) == strr :
 					# # # #print("mapfunvc")
@@ -914,23 +936,6 @@ def turn2func(ev) :
 
 ##################
 
-import kivy
-from kivy.app import App
-from kivy.uix.boxlayout import BoxLayout
-from kivy.uix.button import Button
-from kivy.uix.widget import Widget
-from kivy.uix.button import Button
-from kivy.uix.switch import Switch
-from kivy.uix.label import Label
-from kivy.uix.floatlayout import FloatLayout
-from kivy.uix.screenmanager import ScreenManager, Screen
-from kivy.clock import Clock
-
-#from lympha import *
-#import lympha as lympha
-
-sm = ScreenManager()
-
 class ScreenOne(Screen):
     
     def __init__(self, **kwargs):
@@ -992,9 +997,8 @@ class ScreenOne(Screen):
         okbtn.bind(on_press=self.oking)
         v_box.add_widget(okbtn)            
         self.add_widget(v_box)               
-
-
         #self.manager.current = 'screen1'
+
 
     def procedure(self,*args):
         super().__procedure__(**kwargs)
@@ -1029,16 +1033,16 @@ sc1 = ScreenOne(name='screen1')
 class TestClass(App):
 		def build(self):
 			#mainfunc()
+			global sm
 			global filenames
 			global filecheck
 			global mode_exe  
 			global starts
 			global steps
 			global prefilenames 
-			global prestarts 
-			global presteps
+			#global prestarts 
 			sys.argv = list()
-			sys.argv = ["-f", "CRB65.lympha","-steps", "5", "-exe", "-start", "meeting."]
+			sys.argv = ["-f", "CRB65.lympha","-steps", "1", "-exe", "-start", "meeting."]
 			argv_len=len(sys.argv)
 
 			for x in range(0, argv_len):
@@ -1055,13 +1059,16 @@ class TestClass(App):
 			#steps = 1
 			lexer()
 			nextstates = list()
-			#for step in range(0, int(presteps)):
-					#for start in prestarts:
-						#mapfunc()
-						#sm.add_widget(sc1)
+			try:
+				#for step in range(0, int(presteps)):
+				
+					for start in prestarts:
+						mapfunc()
+						sm.add_widget(sc1)
 
-						#return sm
-
+					#	return sm
+			except:		
+				pass
 			mapfunc()
 ###???
 			sm.add_widget(sc1)
