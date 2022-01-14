@@ -520,6 +520,7 @@ class ScreenOne(Screen):
 		starts = prestarts
 		step_count = 0 
 		start_count = 0 
+		turned = False
 		for step in range(0, int(steps)):
 			if step_count == step_turn :
 				step_turn += 1
@@ -528,7 +529,8 @@ class ScreenOne(Screen):
 				#print("Steps: %s" % steps)
 				checked = 0 
 				for start in starts:
-					if start_count == start_turn :
+					if start_count == start_turn and turned == False:
+						turned = True
 						start_turn += 1
 						start_count += 1
 						for key in range(0,len(object_list)):
