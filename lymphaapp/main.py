@@ -10,7 +10,7 @@ from kivy.uix.label import Label
 from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.clock import Clock
-
+from kivy.properties import StringProperty, NumericProperty, ObjectProperty
 
 #from lympha import *
 #import lympha as lympha
@@ -426,14 +426,19 @@ def turn2func(ev) :
 ##################
 start_turn=0
 step_turn=0
+#class ScreenOne(FloatLayout):
 class ScreenOne(Screen):
     
-	def __init__(self, **kwargs):
-				super().__init__(**kwargs)
+	inputlabel1 = NumericProperty(0)    
+	#def __init__(self, **kwargs):
+	def update(self,dt):
+				#super().__init__(**kwargs)
         #mainfunc()
+				global sm
 				global sc1
 				global title
 				self.switch = Switch()
+				#self.clear_widgets()
 				h_box = BoxLayout(orientation='horizontal')
 				v_box = BoxLayout(orientation='vertical')
         #my_show_list = ["My Way", "Wine Drinker", "Boots"]
@@ -469,10 +474,11 @@ class ScreenOne(Screen):
 				#self.remove_widget(self.('main'))
 				self.add_widget(v_box)               
 				#self.manager.current = 'screen1'
-
+				
 
 #Function for running the linked list.
 	def mapfunc(self,*args):
+	#def mapfunc(self,dt):
 		#global d3
 		#global UI
 		#global CLI_filename 
@@ -522,6 +528,12 @@ class ScreenOne(Screen):
 		start_count = 0 
 		turned = False
 		for step in range(0, int(steps)):
+			if step_count > step_turn :
+				#step_count += 1
+				turned = True
+			if step_count < step_turn :
+				step_count += 1
+				turned = False
 			if step_count == step_turn :
 				step_turn += 1
 				step_count += 1
@@ -529,15 +541,21 @@ class ScreenOne(Screen):
 				#print("Steps: %s" % steps)
 				checked = 0 
 				for start in starts:
+					if start_count > start_turn :
+						#start_count += 1
+						turned = True
+					if start_count < start_turn :
+						start_count += 1
+						turned = False
 					if start_count == start_turn and turned == False:
 						turned = True
+						self.clear_widgets()
 						start_turn += 1
 						start_count += 1
 						for key in range(0,len(object_list)):
 							endstring = str()
 							strr=str("%s" % object_list[key].name)
 							strr = re.sub("\s+", "", strr.strip())
-
 
 							#sm.add_widget(sc1)
 							#Clock.unschedule(sc1.__init__())
@@ -913,8 +931,9 @@ class ScreenOne(Screen):
 
 								#graphstr += ('"%s" [label="step %s: %s\\n%s", fillcolor=yellow, style=filled] ; \n' % (start,step+1,start,str(graph_string)))
 								title = ('"%s" [label="step %s: %s\\n%s", fillcolor=yellow, style=filled] ; \n' % (start,step+1,start,str(graph_string)))
-
-							Clock.unschedule(sc1.__init__())
+							#self.clear_widgets()
+							#self.reload()
+							#Clock.unschedule(self.__init__())
 							breaking = True
 							break
 						if breaking == True :
@@ -975,18 +994,18 @@ class ScreenOne(Screen):
 #				if mode_graph == True:
 #				graphstr += '}'
 
-							try:
-								graphstr += "}"
+							#try:
+							#	graphstr += "}"
 
-							except:	
-								pass        
+							#except:	
+							#	pass        
 #					open('lympha.dot', 'w').close()
 #					outputfile = open("lympha.dot", "w")
 #					outputfile.write(graphstr)
 #					outputfile.close()
 #					cmd = 'dot lympha.dot -Tps -o lympha.pdf'
 #					os.system(cmd)
-					
+		
 		CLI_filename = None
 		argv_len = None
 		filename = None
@@ -1023,6 +1042,7 @@ sc1 = ScreenOne(name='screen1')
 class TestClass(App):
 		def build(self):
 			#mainfunc()
+			global sc1
 			global sm
 			global filenames
 			global filecheck
@@ -1053,8 +1073,9 @@ class TestClass(App):
 
 			#mapfunc()
 ###???
-			sm.add_widget(sc1)
-			return sm
+			#sm.add_widget(sc1)
+			Clock.schedule_interval(sc1.update , 0.2)
+			return sc1
 
  
         
