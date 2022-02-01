@@ -9,7 +9,8 @@ BP_under_90? = 1B ;
 
 hospital? = 2 <= |{ confused?, age_geq_65y?, BP_under_90?, breath_geq_30? }| ;
 
-crepitations. -> pneumonia. ;
+
+crepitations. -> antibiotics. ;
 
 meeting. -> confused? ;
 meeting. -> breath_geq_30? ;
@@ -21,3 +22,5 @@ age_geq_65y? -> hospital? ;
 BP_under_90? -> hospital? ;
 hospital? -> referral. ;
 referral. -> action. ;
+
+crepitations. -> antibiotics. ;
