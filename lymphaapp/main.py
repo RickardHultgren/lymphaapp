@@ -940,29 +940,18 @@ class ScreenOne(Screen):
 							#self.clear_widgets()
 							#self.reload()
 							#Clock.unschedule(self.__init__())
-							breaking = True
-							#break
-						#if breaking == True :
-							#break
-					#if breaking == True :
-							#break
-				#if breaking == True :
-					#break
-				if breaking ==False :
-							     							
 								#return
 								#sm.add_widget(sc1)
 								#sm.current
 								#return sm
-							#alert("before draw2")									
-							#try:	
-							#	for next_object in object_list[key].next_list :
+							try:	
+								for next_object in object_list[key].next_list :
 
-							#		if object_list[key].name != next_object :
-							#			graphstr += ('"%s" -> "%s" ; \n' % (start,next_object))
-							#			nextstates.append(next_object)
-							#except:
-							#	pass
+									if object_list[key].name != next_object :
+										graphstr += ('"%s" -> "%s" ; \n' % (start,next_object))
+										nextstates.append(next_object)
+							except:
+								pass
 
 
 					for start in starts :
@@ -996,6 +985,7 @@ class ScreenOne(Screen):
 					for nexting in nextstates: 
 						if nexting not in starts: 
 									starts.append(nexting) 
+					print(starts)
 					del nextstates[:]
 #				if mode_graph == True:
 #				graphstr += '}'
@@ -1058,7 +1048,7 @@ class TestClass(App):
 			global prefilenames 
 			#global prestarts 
 			sys.argv = list()
-			sys.argv = ["-f", "CRB65.lympha","-steps", "3", "-exe", "-start", "crepitation."]
+			sys.argv = ["-f", "CRB65.lympha","-steps", "2", "-exe", "-start", "crepitation."]
 			argv_len=len(sys.argv)
 
 			for x in range(0, argv_len):
