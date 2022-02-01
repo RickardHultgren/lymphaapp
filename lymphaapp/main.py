@@ -531,9 +531,11 @@ class ScreenOne(Screen):
 			if step_count > step_turn :
 				#step_count += 1
 				turned = True
+				##breaking = False
 			if step_count < step_turn :
 				step_count += 1
 				turned = False
+				#breaking = False
 			if step_count == step_turn :
 				step_turn += 1
 				step_count += 1
@@ -543,11 +545,14 @@ class ScreenOne(Screen):
 				for start in starts:
 					if start_count > start_turn :
 						#start_count += 1
-						turned = True
+						#breaking = True
+						turned = False
 					if start_count < start_turn :
 						start_count += 1
+						#breaking = True
 						turned = False
 					if start_count == start_turn and turned == False:
+						#breaking = False
 						turned = True
 						self.clear_widgets()
 						start_turn += 1
@@ -913,7 +918,7 @@ class ScreenOne(Screen):
 										graph_string=object_list[key].statement_value
 									#graphstr += ('"%s" [label="step %s: %s\\n%s", fillcolor=white, style=filled] ; \n' % (start,step+1,start,str(graph_string)))
 									title += ('"%s" [label="step %s: %s\\n%s", fillcolor=white, style=filled] ; \n' % (start,step+1,start,str(graph_string)))
-
+									print("1")
 
 							#graphstr += ('"%s" [label="step %s: %s\\n%s"] \n' % (start,step+1,start,graph_string)) 
 					#alert("before draw")
@@ -931,18 +936,19 @@ class ScreenOne(Screen):
 
 								#graphstr += ('"%s" [label="step %s: %s\\n%s", fillcolor=yellow, style=filled] ; \n' % (start,step+1,start,str(graph_string)))
 								title = ('"%s" [label="step %s: %s\\n%s", fillcolor=yellow, style=filled] ; \n' % (start,step+1,start,str(graph_string)))
+								print("2")
 							#self.clear_widgets()
 							#self.reload()
 							#Clock.unschedule(self.__init__())
 							breaking = True
-							break
-						if breaking == True :
-							break
-					if breaking == True :
-							break
+							#break
+						#if breaking == True :
+							#break
+					#if breaking == True :
+							#break
 				#if breaking == True :
 					#break
-				if breaking == False :
+				if breaking ==False :
 							     							
 								#return
 								#sm.add_widget(sc1)
@@ -984,13 +990,13 @@ class ScreenOne(Screen):
 												if object_list[k].flow  == 1 or object_list[k].statement_flow == 1 and object_list[l].flow != 0:
 													object_list[l].flow = 1
 													object_list[l].statement_flow = 1
-							checked = 0
-							del starts[:]
+					checked = 0
+					del starts[:]
 							#starts = list()                           
-							for nexting in nextstates: 
-								if nexting not in starts: 
+					for nexting in nextstates: 
+						if nexting not in starts: 
 									starts.append(nexting) 
-							del nextstates[:]
+					del nextstates[:]
 #				if mode_graph == True:
 #				graphstr += '}'
 
@@ -1052,7 +1058,7 @@ class TestClass(App):
 			global prefilenames 
 			#global prestarts 
 			sys.argv = list()
-			sys.argv = ["-f", "CRB65.lympha","-steps", "5", "-exe", "-start", "meeting."]
+			sys.argv = ["-f", "CRB65.lympha","-steps", "3", "-exe", "-start", "crepitation."]
 			argv_len=len(sys.argv)
 
 			for x in range(0, argv_len):

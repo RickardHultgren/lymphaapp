@@ -1,12 +1,6 @@
 #LYMPHA v. 1.1
 #CRB65
 
-#Reference:
-#by Rickard Verner Hultgren
-#15 May 2019
-
-
-
 breath_geq_30? = 0B ;
 confused? = 0B ;
 age_geq_65y? = 1B ;
@@ -14,6 +8,8 @@ BP_under_90? = 1B ;
 #hospital? = 1 == |{ confused?, age_geq_65y?, BP_under_90?, breath_geq_30? }| ;
 
 hospital? = 2 <= |{ confused?, age_geq_65y?, BP_under_90?, breath_geq_30? }| ;
+
+crepitations. -> pneumonia. ;
 
 meeting. -> confused? ;
 meeting. -> breath_geq_30? ;
